@@ -30,8 +30,8 @@ pipeline{
         
         stage('Docker Push'){
             steps{
-                withCredentials([string(credentialsId: 'docker', variable: '')]) {
-                sh 'docker login -u priyas2180 -p ${dockerpush}'
+               withCredentials([string(credentialsId: 'docker', variable: 'dockerpush')]) {
+               sh 'docker login -u priyas2180 -p ${dockerpush}'
                 }
                  sh 'docker push priyas2180/myjavaproject27un'
             }
