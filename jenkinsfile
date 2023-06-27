@@ -24,16 +24,16 @@ pipeline{
         
         stage('Docker Build'){
             steps{
-                sh 'docker build -t priya2180/myjavaproject27un .'
+                sh 'docker build -t priyas2180/myjavaproject27un .'
             }
         }
         
         stage('Docker Push'){
             steps{
                 withCredentials([string(credentialsId: 'docker', variable: '')]) {
-                sh 'docker login -u priya2180 -p ${dockerpush}'
+                sh 'docker login -u priyas2180 -p ${dockerpush}'
                 }
-                 sh 'docker push priya2180/myjavaproject27un'
+                 sh 'docker push priyas2180/myjavaproject27un'
             }
            
         }
