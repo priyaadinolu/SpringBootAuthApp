@@ -13,6 +13,14 @@ pipeline{
                git branch: 'main', url: 'https://github.com/priyaadinolu/SpringBootAuthApp'
             }
         }
+    stage("Build"){
+            
+            steps{
+                  sh "mvn clean install -DskipTests"
+                      
+                   }
+                                       
+                  }
         
         stage('Docker Build'){
             steps{
