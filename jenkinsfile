@@ -1,0 +1,41 @@
+pipeline{
+    agent any
+    
+    tools {
+        maven 'mymaven'
+            }
+    
+    stages{
+        
+        stage('Git Clone'){
+            
+            steps{
+               git branch: 'main', url: 'https://github.com/priyaadinolu/SpringBootAuthApp'
+            }
+        }
+    stage("Build"){
+            
+            steps{
+                  sh "mvn clean install -DskipTests"
+                      
+                   }
+                                       
+                  }
+        
+        stage('Docker Build'){
+            steps{
+                sh 'docker build -t priyas2180/myjavaproject28jjun .'
+            }
+        }
+        
+        stage('Docker Push'){
+            steps{
+              withCredentials([string(credentialsId: 'docker', variable: 'dockerpush')]) {
+               sh 'docker login -u priyas2180 -p ${dockerpush}'
+                }
+                 sh 'docker push priyas2180/myjavaproject28jjun'
+            }
+           
+        }
+    }
+}
